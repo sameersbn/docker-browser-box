@@ -1,0 +1,51 @@
+#!/bin/bash
+set -e
+
+case "$1" in
+  install)
+    echo "Installing browser-bundle..."
+    install -m 0755 /scripts/browser-bundle /target/
+    echo "Installing google-chrome..."
+    ln -sf browser-bundle /target/google-chrome
+    echo "Installing google-chrome-stable..."
+    ln -sf browser-bundle /target/google-chrome-stable
+    echo "Installing tor-browser..."
+    ln -sf browser-bundle /target/tor-browser
+    ;;
+  uninstall)
+    echo "Uninstalling browser-bundle..."
+    rm -rf /target/browser-bundle
+    echo "Uninstalling google-chrome..."
+    rm -rf /target/google-chrome
+    echo "Uninstalling google-chrome-stable..."
+    rm -rf /target/google-chrome-stable
+    echo "Uninstalling tor-browser..."
+    rm -rf /target/tor-browser
+    ;;
+  tor-browser|google-chrome|google-chrome-stable)
+    # uid and gid of host user
+    USER_UID=${USER_UID:-1000}
+    USER_GID=${USER_GID:-1000}
+
+    # create user group
+    groupadd -g ${USER_GID} anonymous
+
+    # create user with uid and gid matching that of the host user
+    adduser --disabled-login --uid ${USER_UID} --gid ${USER_GID} \
+        --gecos 'Anonymous' anonymous
+
+    extra_opts=
+    case "$1" in
+      google-chrome|google-chrome-stable)
+        extra_opts="--no-sandbox"
+        ;;
+    esac
+
+    # launch application as anonymous
+    cd /home/anonymous
+    exec sudo -u anonymous -H PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
+    ;;
+  *)
+    exec $@
+    ;;
+esac

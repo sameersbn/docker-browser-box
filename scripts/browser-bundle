@@ -1,0 +1,21 @@
+#!/bin/bash
+
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+
+prog=$(basename $0)
+exec=$(which $prog)
+
+if [ -n "${exec}" ]; then
+  exec ${exec} $@
+else
+  USER_UID=$(id -u)
+  USER_GID=$(id -g)
+
+  docker run -it --rm \
+    --env="USER_UID=${USER_UID}" \
+    --env="USER_GID=${USER_GID}" \
+    --env="DISPLAY=${DISPLAY}" \
+    --volume=/tmp/.X11-unix:/tmp/.X11-unix \
+    --volume=/run/user/${USER_UID}/pulse:/run/pulse \
+    sameersbn/browser-bundle:latest $(basename $0) $@
+fi
