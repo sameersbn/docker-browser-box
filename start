@@ -22,7 +22,10 @@ case "$1" in
     echo "Uninstalling tor-browser..."
     rm -rf /target/tor-browser
     ;;
-  tor-browser|google-chrome|google-chrome-stable)
+  bash)
+    exec $@
+    ;;
+  *)
     # uid and gid of host user
     USER_UID=${USER_UID:-1000}
     USER_GID=${USER_GID:-1000}
@@ -44,8 +47,5 @@ case "$1" in
     # launch application as anonymous
     cd /home/anonymous
     exec sudo -u anonymous -H PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
-    ;;
-  *)
-    exec $@
     ;;
 esac
