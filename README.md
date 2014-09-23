@@ -12,6 +12,8 @@ Dockerized google-chome and tor-browser with audio support via pulseaudio and do
 
 The image does require pulseaudio for audio support which is installed on all major linux distributions out of the box.
 
+![browser](https://cloud.githubusercontent.com/assets/410147/4377777/2ccda3d2-4352-11e4-9314-122e4f58a30c.gif)
+
 # Installation
 
 Install the wrapper scripts using:
