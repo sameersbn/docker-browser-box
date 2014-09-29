@@ -11,6 +11,19 @@ else
   USER_UID=$(id -u)
   USER_GID=$(id -g)
 
+  # remove stopped containers
+  echo "Removing stopped containers..."
+  for c in $(docker ps -a -q)
+  do
+    image="$(docker inspect -f {{.Config.Image}} ${c})"
+    if [ "${image}" == "sameersbn/browser-bundle:latest" ]; then
+      running=$(docker inspect -f {{.State.Running}} ${c})
+      if [ "${running}" != "true" ]; then
+        docker rm "${c}" >/dev/null
+      fi
+    fi
+  done
+
   docker run -d \
     --env="USER_UID=${USER_UID}" \
     --env="USER_GID=${USER_GID}" \
