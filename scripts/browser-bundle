@@ -11,7 +11,7 @@ else
   USER_UID=$(id -u)
   USER_GID=$(id -g)
 
-  docker run -it --rm \
+  docker run -d \
     --env="USER_UID=${USER_UID}" \
     --env="USER_GID=${USER_GID}" \
     --env="DISPLAY=${DISPLAY}" \
