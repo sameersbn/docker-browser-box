@@ -36,8 +36,10 @@ case "$1" in
     fi
 
     # create user with uid and gid matching that of the host user
-    adduser --disabled-login --uid ${USER_UID} --gid ${USER_GID} \
+    if ! getent passwd anonymous >/dev/null; then
+      adduser --disabled-login --uid ${USER_UID} --gid ${USER_GID} \
         --gecos 'Anonymous' anonymous
+    fi
 
     extra_opts=
     case "$1" in
