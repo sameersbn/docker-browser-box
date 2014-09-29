@@ -24,11 +24,12 @@ else
     fi
   done
 
+  echo "Starting ${prog}..."
   docker run -d \
     --env="USER_UID=${USER_UID}" \
     --env="USER_GID=${USER_GID}" \
     --env="DISPLAY=${DISPLAY}" \
     --volume=/tmp/.X11-unix:/tmp/.X11-unix \
     --volume=/run/user/${USER_UID}/pulse:/run/pulse \
-    sameersbn/browser-bundle:latest $(basename $0) $@
+    sameersbn/browser-bundle:latest $(basename $0) $@ >/dev/null
 fi
