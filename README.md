@@ -1,6 +1,7 @@
 # Table of Contents
 
 - [Introduction](#introduction)
+- [Contributing](#contributing)
 - [Installation](#installation)
 - [How it works](#how-it-works)
 - [Upgrading](#upgrading)
@@ -13,6 +14,14 @@ Dockerized google-chome and tor-browser with audio support via pulseaudio and do
 The image does require pulseaudio for audio support which is installed on all major linux distributions out of the box.
 
 ![browser](https://cloud.githubusercontent.com/assets/410147/4377777/2ccda3d2-4352-11e4-9314-122e4f58a30c.gif)
+
+# Contributing
+
+If you find this image useful here's how you can help:
+
+- Send a Pull Request with your awesome new features and bug fixes
+- Help new users with [Issues](https://github.com/sameersbn/docker-browser-bundle/issues) they may encounter
+- Send me a tip on [Gittip](https://gittip.com/sameersbn/) or using Bitcoin at **16rDxVqJPyYAFYPLduTaSiwe7ZiY1hHqKM**
 
 # Installation
 
