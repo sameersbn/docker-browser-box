@@ -14,10 +14,10 @@ help:
 build:
 	@docker build --tag=${USER}/browser-bundle .
 
-install:
+install uninstall: build
 	@docker run -it --rm \
 		--volume=/usr/local/bin:/target \
-		${USER}/browser-bundle:latest install
+		${USER}/browser-bundle:latest $@
 
 google-chrome tor-browser bash:
 	@docker run -it --rm \
