@@ -10,7 +10,7 @@ RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo 
       libgl1-mesa-glx libgl1-mesa-dri \
  && update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX \
  && mkdir -p /usr/lib/tor-browser \
- && wget -nv https://www.torproject.org/dist/torbrowser/3.6.6/tor-browser-linux64-3.6.6_en-US.tar.xz -O - \
+ && wget -nv https://www.torproject.org/dist/torbrowser/4.0/tor-browser-linux32-4.0_en-US.tar.xz -O - \
       | tar -Jvxf - --strip=1 -C /usr/lib/tor-browser \
  && ln -sf /usr/lib/tor-browser/start-tor-browser /usr/bin/tor-browser \
  && rm -rf /var/lib/apt/lists/* # 20140919
