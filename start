@@ -3,18 +3,18 @@ set -e
 
 case "$1" in
   install)
-    echo "Installing browser-bundle..."
-    install -m 0755 /scripts/browser-bundle /target/
+    echo "Installing browser-box..."
+    install -m 0755 /scripts/browser-box /target/
     echo "Installing google-chrome..."
-    ln -sf browser-bundle /target/google-chrome
+    ln -sf browser-box /target/google-chrome
     echo "Installing google-chrome-stable..."
-    ln -sf browser-bundle /target/google-chrome-stable
+    ln -sf browser-box /target/google-chrome-stable
     echo "Installing tor-browser..."
-    ln -sf browser-bundle /target/tor-browser
+    ln -sf browser-box /target/tor-browser
     ;;
   uninstall)
-    echo "Uninstalling browser-bundle..."
-    rm -rf /target/browser-bundle
+    echo "Uninstalling browser-box..."
+    rm -rf /target/browser-box
     echo "Uninstalling google-chrome..."
     rm -rf /target/google-chrome
     echo "Uninstalling google-chrome-stable..."

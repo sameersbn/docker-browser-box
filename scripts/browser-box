@@ -16,7 +16,7 @@ else
   for c in $(docker ps -a -q)
   do
     image="$(docker inspect -f {{.Config.Image}} ${c})"
-    if [ "${image}" == "sameersbn/browser-bundle:latest" ]; then
+    if [ "${image}" == "sameersbn/browser-box:latest" ]; then
       running=$(docker inspect -f {{.State.Running}} ${c})
       if [ "${running}" != "true" ]; then
         docker rm "${c}" >/dev/null
@@ -31,5 +31,5 @@ else
     --env="DISPLAY=${DISPLAY}" \
     --volume=/tmp/.X11-unix:/tmp/.X11-unix \
     --volume=/run/user/${USER_UID}/pulse:/run/pulse \
-    sameersbn/browser-bundle:latest $(basename $0) $@ >/dev/null
+    sameersbn/browser-box:latest $(basename $0) $@ >/dev/null
 fi

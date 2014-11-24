@@ -20,7 +20,7 @@ The image does require pulseaudio for audio support which is installed on all ma
 If you find this image useful here's how you can help:
 
 - Send a Pull Request with your awesome new features and bug fixes
-- Help new users with [Issues](https://github.com/sameersbn/docker-browser-bundle/issues) they may encounter
+- Help new users with [Issues](https://github.com/sameersbn/docker-browser-box/issues) they may encounter
 - Send me a tip via [Bitcoin](https://www.coinbase.com/sameersbn) or using [Gratipay](https://gratipay.com/sameersbn/)
 
 # Installation
@@ -29,7 +29,7 @@ Install the wrapper scripts using:
 
 ```bash
 docker run -it --rm -v /usr/local/bin:/target \
-sameersbn/browser-bundle:latest install
+sameersbn/browser-box:latest install
 ```
 
 This will install wrapper scripts to launch
@@ -57,14 +57,14 @@ The wrapper scripts volume mount the X11 and pulseaudio sockets in the launcher 
 To upgrade to newer releases, simply update the image
 
 ```
-docker pull sameersbn/browser-bundle:latest
+docker pull sameersbn/browser-box:latest
 ```
 
 # Uninstallation
 
 ```bash
 docker run -it --rm -v /usr/local/bin:/target \
-sameersbn/browser-bundle:latest uninstall
+sameersbn/browser-box:latest uninstall
 ```
 
 # References

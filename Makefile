@@ -4,7 +4,7 @@ help:
 	@echo ""
 	@echo "-- Help Menu"
 	@echo ""
-	@echo "   1. make build            - build the browser-bundle image"
+	@echo "   1. make build            - build the browser-box image"
 	@echo "   1. make install          - install launch wrappers"
 	@echo "   2. make google-chrome    - launch google-chrome"
 	@echo "   2. make tor-browser      - launch tor-browser"
@@ -12,12 +12,12 @@ help:
 	@echo ""
 
 build:
-	@docker build --tag=${USER}/browser-bundle .
+	@docker build --tag=${USER}/browser-box .
 
 install uninstall: build
 	@docker run -it --rm \
 		--volume=/usr/local/bin:/target \
-		${USER}/browser-bundle:latest $@
+		${USER}/browser-box:latest $@
 
 google-chrome tor-browser bash:
 	@docker run -it --rm \
@@ -26,4 +26,4 @@ google-chrome tor-browser bash:
 		--env="DISPLAY=${DISPLAY}" \
 		--volume=/tmp/.X11-unix:/tmp/.X11-unix \
 		--volume=/run/user/$(shell id -u)/pulse:/run/pulse \
-		${USER}/browser-bundle:latest $@
+		${USER}/browser-box:latest $@
