@@ -1,4 +1,4 @@
-FROM sameersbn/ubuntu:14.04.20150120
+FROM sameersbn/ubuntu:14.04.20150220
 
 RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo apt-key add - \
  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
@@ -13,7 +13,7 @@ RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo 
  && wget -nv https://www.torproject.org/dist/torbrowser/4.0.3/tor-browser-linux64-4.0.3_en-US.tar.xz -O - \
       | tar -Jvxf - --strip=1 -C /usr/lib/tor-browser \
  && ln -sf /usr/lib/tor-browser/start-tor-browser /usr/bin/tor-browser \
- && rm -rf /var/lib/apt/lists/* # 20140919
+ && rm -rf /var/lib/apt/lists/* # 20150220
 
 ADD scripts /scripts
 ADD start /start
