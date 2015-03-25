@@ -20,7 +20,7 @@ install uninstall: build
 		${USER}/browser-box:latest $@
 
 google-chrome tor-browser bash:
-	@docker run -it --rm \
+	@docker run -it --rm --cap-add=SYS_ADMIN \
 		--env="USER_UID=$(shell id -u)" \
 		--env="USER_GID=$(shell id -g)" \
 		--env="DISPLAY=${DISPLAY}" \

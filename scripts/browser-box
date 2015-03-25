@@ -26,6 +26,7 @@ else
 
   echo "Starting ${prog}..."
   docker run -d \
+    --cap-add=SYS_ADMIN \
     --env="USER_UID=${USER_UID}" \
     --env="USER_GID=${USER_GID}" \
     --env="DISPLAY=${DISPLAY}" \
