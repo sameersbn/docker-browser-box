@@ -19,7 +19,7 @@ install uninstall: build
 		--volume=/usr/local/bin:/target \
 		${USER}/browser-box:latest $@
 
-google-chrome tor-browser bash:
+google-chrome tor-browser chromium-browser bash:
 	@docker run -it --rm --cap-add=SYS_ADMIN \
 		--env="USER_UID=$(shell id -u)" \
 		--env="USER_GID=$(shell id -g)" \

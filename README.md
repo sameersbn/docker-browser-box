@@ -9,7 +9,7 @@
 
 # Introduction
 
-Dockerized google-chome and tor-browser with audio support via pulseaudio and does not required any complicated setup.
+Dockerized google-chome, chromium-browser and tor-browser with audio support via pulseaudio and does not required any complicated setup.
 
 The image does require pulseaudio for audio support which is installed on all major linux distributions out of the box.
 
