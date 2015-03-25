@@ -41,13 +41,6 @@ case "$1" in
         --gecos 'Anonymous' anonymous
     fi
 
-    extra_opts=
-    case "$1" in
-      google-chrome|google-chrome-stable)
-        extra_opts="--no-sandbox"
-        ;;
-    esac
-
     # launch application as anonymous
     cd /home/anonymous
     exec sudo -u anonymous -H PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
