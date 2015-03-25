@@ -13,6 +13,8 @@ case "$1" in
     ln -sf browser-box /target/tor-browser
     echo "Installing chromium-browser..."
     ln -sf browser-box /target/chromium-browser
+    echo "Installing firefox..."
+    ln -sf browser-box /target/firefox
     ;;
   uninstall)
     echo "Uninstalling browser-box..."
@@ -25,6 +27,8 @@ case "$1" in
     rm -rf /target/tor-browser
     echo "Uninstalling chromium-browser..."
     rm -rf /target/chromium-browser
+    echo "Uninstalling firefox..."
+    rm -rf /target/firefox
     ;;
   bash)
     exec $@
