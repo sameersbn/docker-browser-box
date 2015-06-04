@@ -51,6 +51,6 @@ case "$1" in
 
     # launch application as anonymous
     cd /home/anonymous
-    exec sudo -u anonymous -H PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
+    exec gosu anonymous PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
     ;;
 esac
