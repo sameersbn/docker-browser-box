@@ -39,18 +39,18 @@ case "$1" in
     USER_GID=${USER_GID:-1000}
 
     # create user group
-    if ! getent group anonymous >/dev/null; then
-      groupadd -f -g ${USER_GID} anonymous
+    if ! getent group ${WEB_BROWSER_USER} >/dev/null; then
+      groupadd -f -g ${USER_GID} ${WEB_BROWSER_USER}
     fi
 
     # create user with uid and gid matching that of the host user
-    if ! getent passwd anonymous >/dev/null; then
+    if ! getent passwd ${WEB_BROWSER_USER} >/dev/null; then
       adduser --disabled-login --uid ${USER_UID} --gid ${USER_GID} \
-        --gecos 'Anonymous' anonymous
+        --gecos 'Browser Box' ${WEB_BROWSER_USER}
     fi
 
-    # launch application as anonymous
-    cd /home/anonymous
-    exec sudo -u anonymous -H PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
+    # launch application as ${WEB_BROWSER_USER}
+    cd /home/${WEB_BROWSER_USER}
+    exec sudo -u ${WEB_BROWSER_USER} -H PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
     ;;
 esac
