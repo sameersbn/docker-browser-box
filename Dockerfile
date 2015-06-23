@@ -14,9 +14,11 @@ RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo 
       google-chrome-stable chromium-browser firefox \
  && update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX \
  && mkdir -p /usr/lib/tor-browser \
- && wget -nv https://www.torproject.org/dist/torbrowser/${TOR_BROWSER_VERSION}/tor-browser-linux64-${TOR_BROWSER_VERSION}_en-US.tar.xz -O - \
-      | tar -Jvxf - --strip=1 -C /usr/lib/tor-browser \
+ && wget -O /tmp/tor-browser-linux64-${TOR_BROWSER_VERSION}_en-US.tar.xz \
+      https://www.torproject.org/dist/torbrowser/${TOR_BROWSER_VERSION}/tor-browser-linux64-${TOR_BROWSER_VERSION}_en-US.tar.xz \
+ && tar -Jvxf /tmp/tor-browser-linux64-${TOR_BROWSER_VERSION}_en-US.tar.xz --strip=1 -C /usr/lib/tor-browser \
  && ln -sf /usr/lib/tor-browser/Browser/start-tor-browser /usr/bin/tor-browser \
+ && rm -rf /tmp/tor-browser-linux64-${TOR_BROWSER_VERSION}_en-US.tar.xz \
  && rm -rf /var/lib/apt/lists/*
 
 ADD scripts /scripts
