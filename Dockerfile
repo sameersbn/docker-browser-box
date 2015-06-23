@@ -17,7 +17,7 @@ RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo 
  && rm -rf /var/lib/apt/lists/* # 20150613
 
 ADD scripts /scripts
-ADD entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
+ADD entrypoint.sh /sbin/entrypoint.sh
+RUN chmod 755 /sbin/entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/sbin/entrypoint.sh"]
