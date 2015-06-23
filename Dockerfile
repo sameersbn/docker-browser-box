@@ -14,7 +14,7 @@ RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo 
  && wget -nv https://www.torproject.org/dist/torbrowser/4.0.8/tor-browser-linux64-4.0.8_en-US.tar.xz -O - \
       | tar -Jvxf - --strip=1 -C /usr/lib/tor-browser \
  && ln -sf /usr/lib/tor-browser/start-tor-browser /usr/bin/tor-browser \
- && rm -rf /var/lib/apt/lists/* # 20150613
+ && rm -rf /var/lib/apt/lists/*
 
 ADD scripts /scripts
 ADD entrypoint.sh /sbin/entrypoint.sh
