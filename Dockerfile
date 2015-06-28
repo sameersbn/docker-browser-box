@@ -21,8 +21,8 @@ RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo 
  && rm -rf /tmp/tor-browser-linux64-${TOR_BROWSER_VERSION}_en-US.tar.xz \
  && rm -rf /var/lib/apt/lists/*
 
-ADD scripts /scripts
-ADD entrypoint.sh /sbin/entrypoint.sh
+COPY scripts /scripts
+COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
