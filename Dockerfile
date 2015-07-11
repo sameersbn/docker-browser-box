@@ -1,4 +1,4 @@
-FROM sameersbn/ubuntu:14.04.20150613
+FROM sameersbn/ubuntu:14.04.20150712
 
 ENV TOR_BROWSER_VERSION=4.5.2 \
     WEB_BROWSER_USER=browser
