@@ -28,6 +28,15 @@ else
     fi
   done
 
+  # enumerate video devices for webcam support
+  VIDEO_DEVICES=
+  for device in /dev/video*
+  do
+    if [ -c $device ]; then
+      VIDEO_DEVICES="${VIDEO_DEVICES} --device $device:$device"
+    fi
+  done
+
   echo "Starting ${prog}..."
   touch ${XAUTH}
   docker run -d \
@@ -36,6 +45,7 @@ else
     --env="USER_GID=${USER_GID}" \
     --env="DISPLAY" \
     --env="XAUTHORITY=${XAUTH}" \
+    ${VIDEO_DEVICES} \
     --volume=${XSOCK}:${XSOCK} \
     --volume=${XAUTH}:${XAUTH} \
     --volume=/run/user/${USER_UID}/pulse:/run/pulse \

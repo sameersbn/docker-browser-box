@@ -49,7 +49,19 @@ case "$1" in
         --gecos 'Browser Box' ${WEB_BROWSER_USER}
     fi
 
-    # launch application as ${WEB_BROWSER_USER}
+    # grant access to video devices
+    for device in /dev/video*
+    do
+      if [[ -c $device ]]; then
+        VIDEO_GID=$(stat -c %g $device)
+        break
+      fi
+    done
+
+    if [[ -n $VIDEO_GID ]]; then
+      usermod -a -G $VIDEO_GID ${WEB_BROWSER_USER}
+    fi
+
     cd /home/${WEB_BROWSER_USER}
     exec sudo -u ${WEB_BROWSER_USER} -H PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
     ;;
