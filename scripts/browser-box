@@ -28,6 +28,19 @@ else
     fi
   done
 
+  CAPABILITIES+="--cap-add=SYS_ADMIN"
+
+  # collect environment variables
+  ENV_VARS+=" --env=USER_UID=${USER_UID}"
+  ENV_VARS+=" --env=USER_GID=${USER_GID}"
+  ENV_VARS+=" --env=DISPLAY"
+  ENV_VARS+=" --env=XAUTHORITY=${XAUTH}"
+
+  # collect volumes arguments
+  VOLUMES+=" --volume=${XSOCK}:${XSOCK}"
+  VOLUMES+=" --volume=${XAUTH}:${XAUTH}"
+  VOLUMES+=" --volume=/run/user/${USER_UID}/pulse:/run/pulse"
+
   # enumerate video devices for webcam support
   VIDEO_DEVICES=
   for device in /dev/video*
@@ -40,14 +53,9 @@ else
   echo "Starting ${prog}..."
   touch ${XAUTH}
   docker run -d \
-    --cap-add=SYS_ADMIN \
-    --env="USER_UID=${USER_UID}" \
-    --env="USER_GID=${USER_GID}" \
-    --env="DISPLAY" \
-    --env="XAUTHORITY=${XAUTH}" \
+    ${CAPABILITIES} \
+    ${ENV_VARS} \
     ${VIDEO_DEVICES} \
-    --volume=${XSOCK}:${XSOCK} \
-    --volume=${XAUTH}:${XAUTH} \
-    --volume=/run/user/${USER_UID}/pulse:/run/pulse \
+    ${VOLUMES} \
     sameersbn/browser-box:latest $(basename $0) $@ >/dev/null
 fi
