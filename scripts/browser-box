@@ -11,6 +11,8 @@ else
   USER_UID=$(id -u)
   USER_GID=$(id -g)
 
+  TZ=$(cat /etc/timezone)
+
   XSOCK=/tmp/.X11-unix
   XAUTH=/tmp/.docker.xauth
   xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
@@ -35,6 +37,7 @@ else
   ENV_VARS+=" --env=USER_GID=${USER_GID}"
   ENV_VARS+=" --env=DISPLAY"
   ENV_VARS+=" --env=XAUTHORITY=${XAUTH}"
+  ENV_VARS+=" --env=TZ=${TZ}"
 
   # collect volumes arguments
   VOLUMES+=" --volume=${XSOCK}:${XSOCK}"
