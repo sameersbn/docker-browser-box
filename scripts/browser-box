@@ -29,7 +29,7 @@ else
     --cap-add=SYS_ADMIN \
     --env="USER_UID=${USER_UID}" \
     --env="USER_GID=${USER_GID}" \
-    --env="DISPLAY=${DISPLAY}" \
+    --env="DISPLAY" \
     --volume=/tmp/.X11-unix:/tmp/.X11-unix \
     --volume=/run/user/${USER_UID}/pulse:/run/pulse \
     sameersbn/browser-box:latest $(basename $0) $@ >/dev/null

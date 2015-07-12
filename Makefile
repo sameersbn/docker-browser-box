@@ -23,7 +23,7 @@ google-chrome tor-browser chromium-browser firefox bash:
 	@docker run -it --rm --cap-add=SYS_ADMIN \
 		--env="USER_UID=$(shell id -u)" \
 		--env="USER_GID=$(shell id -g)" \
-		--env="DISPLAY=${DISPLAY}" \
+		--env="DISPLAY" \
 		--volume=/tmp/.X11-unix:/tmp/.X11-unix \
 		--volume=/run/user/$(shell id -u)/pulse:/run/pulse \
 		${USER}/browser-box:latest $@
