@@ -34,8 +34,10 @@ sameersbn/browser-box:latest install
 
 This will install wrapper scripts to launch
 
-- `google-chome`
+- `google-chome, google-chrome-stable`
+- `chromium-browser`
 - `tor-browser`
+- `firefox`
 
 **If the application being launched is already installed on the host, then the host command is executed and the docker image is not started.**
 
