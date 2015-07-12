@@ -30,10 +30,7 @@ case "$1" in
     echo "Uninstalling firefox..."
     rm -rf /target/firefox
     ;;
-  bash)
-    exec $@
-    ;;
-  *)
+  google-chrome|google-chrome-stable|tor-browser|chromium-browser)
     # uid and gid of host user
     USER_UID=${USER_UID:-1000}
     USER_GID=${USER_GID:-1000}
@@ -64,5 +61,8 @@ case "$1" in
 
     cd /home/${WEB_BROWSER_USER}
     exec sudo -u ${WEB_BROWSER_USER} -H PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
+    ;;
+  bash)
+    exec $@
     ;;
 esac
