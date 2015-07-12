@@ -17,15 +17,17 @@ else
   XAUTH=/tmp/.docker.xauth
   xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
 
+  ( id -Gn | grep docker ) || SUDO=sudo
+
   # remove stopped containers
   echo "Removing stopped containers..."
-  for c in $(docker ps -a -q)
+  for c in $(${SUDO} docker ps -a -q)
   do
-    image="$(docker inspect -f {{.Config.Image}} ${c})"
+    image="$(${SUDO} docker inspect -f {{.Config.Image}} ${c})"
     if [ "${image}" == "sameersbn/browser-box:latest" ]; then
-      running=$(docker inspect -f {{.State.Running}} ${c})
+      running=$(${SUDO} docker inspect -f {{.State.Running}} ${c})
       if [ "${running}" != "true" ]; then
-        docker rm "${c}" >/dev/null
+        ${SUDO} docker rm "${c}" >/dev/null
       fi
     fi
   done
@@ -55,7 +57,7 @@ else
 
   echo "Starting ${prog}..."
   touch ${XAUTH}
-  docker run -d \
+  ${SUDO} docker run -d \
     ${CAPABILITIES} \
     ${ENV_VARS} \
     ${VIDEO_DEVICES} \
