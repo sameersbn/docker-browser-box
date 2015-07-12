@@ -10,7 +10,7 @@ ENV_VARS= \
 	--env="USER_UID=$(shell id -u)" \
 	--env="USER_GID=$(shell id -g)" \
 	--env="DISPLAY" \
-	--env="XAUTHORITY=${XAUTH}" \
+	--env="XAUTHORITY=${XAUTH}"
 
 VOLUMES = \
 	--volume=${XSOCK}:${XSOCK} \
