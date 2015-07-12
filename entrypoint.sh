@@ -30,7 +30,7 @@ case "$1" in
     echo "Uninstalling firefox..."
     rm -rf /target/firefox
     ;;
-  google-chrome|google-chrome-stable|tor-browser|chromium-browser)
+  google-chrome|google-chrome-stable|tor-browser|chromium-browser|firefox)
     # uid and gid of host user
     USER_UID=${USER_UID:-1000}
     USER_GID=${USER_GID:-1000}
