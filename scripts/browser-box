@@ -11,6 +11,10 @@ else
   USER_UID=$(id -u)
   USER_GID=$(id -g)
 
+  XSOCK=/tmp/.X11-unix
+  XAUTH=/tmp/.docker.xauth
+  xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
+
   # remove stopped containers
   echo "Removing stopped containers..."
   for c in $(docker ps -a -q)
@@ -25,12 +29,15 @@ else
   done
 
   echo "Starting ${prog}..."
+  touch ${XAUTH}
   docker run -d \
     --cap-add=SYS_ADMIN \
     --env="USER_UID=${USER_UID}" \
     --env="USER_GID=${USER_GID}" \
     --env="DISPLAY" \
-    --volume=/tmp/.X11-unix:/tmp/.X11-unix \
+    --env="XAUTHORITY=${XAUTH}" \
+    --volume=${XSOCK}:${XSOCK} \
+    --volume=${XAUTH}:${XAUTH} \
     --volume=/run/user/${USER_UID}/pulse:/run/pulse \
     sameersbn/browser-box:latest $(basename $0) $@ >/dev/null
 fi

@@ -1,5 +1,8 @@
 all: build
 
+XSOCK=/tmp/.X11-unix
+XAUTH=/tmp/.docker.xauth
+
 help:
 	@echo ""
 	@echo "-- Help Menu"
@@ -20,10 +23,15 @@ install uninstall: build
 		${USER}/browser-box:latest $@
 
 google-chrome tor-browser chromium-browser firefox bash:
-	@docker run -it --rm --cap-add=SYS_ADMIN \
+	@touch ${XAUTH}
+	@xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
+	@docker run -it --rm \
+		--cap-add=SYS_ADMIN \
 		--env="USER_UID=$(shell id -u)" \
 		--env="USER_GID=$(shell id -g)" \
 		--env="DISPLAY" \
-		--volume=/tmp/.X11-unix:/tmp/.X11-unix \
+		--env="XAUTHORITY=${XAUTH}" \
+		--volume=${XSOCK}:${XSOCK} \
+		--volume=${XAUTH}:${XAUTH} \
 		--volume=/run/user/$(shell id -u)/pulse:/run/pulse \
 		${USER}/browser-box:latest $@
