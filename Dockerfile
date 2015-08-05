@@ -1,6 +1,6 @@
 FROM sameersbn/ubuntu:14.04.20150712
 
-ENV TOR_BROWSER_VERSION=4.5.2 \
+ENV TOR_BROWSER_VERSION=4.5.3 \
     WEB_BROWSER_USER=browser
 
 RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo apt-key add - \
