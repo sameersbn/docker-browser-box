@@ -3,7 +3,7 @@
 PATH=/usr/sbin:/usr/bin:/sbin:/bin
 
 # do we need to use sudo to start docker containers?
-( id -Gn | grep docker ) || SUDO=sudo
+( id -Gn | grep -q docker ) || SUDO=sudo
 
 USER_UID=$(id -u)
 USER_GID=$(id -g)
