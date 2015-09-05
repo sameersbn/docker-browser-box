@@ -6,7 +6,7 @@ prog=$(basename $0)
 exec=$(which $prog)
 
 # launch host binary if it exists
-if [ -n "${exec}" ]; then
+if [[ -n ${exec} ]]; then
   exec ${exec} $@
 fi
 
