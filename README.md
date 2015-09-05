@@ -76,7 +76,7 @@ This will install wrapper scripts to launch:
 
 - `chromium-browser`
 - `firefox`
-- `google-chome, google-chrome-stable`
+- `google-chrome, google-chrome-stable`
 - `tor-browser`
 
 > **Note**
