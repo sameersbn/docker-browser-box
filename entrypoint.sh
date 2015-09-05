@@ -78,7 +78,7 @@ case "$1" in
     grant_access_to_video_devices
     launch_browser $@
     ;;
-  bash)
+  *)
     exec $@
     ;;
 esac
