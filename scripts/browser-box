@@ -28,7 +28,7 @@ else
     if [ "${image}" == "sameersbn/browser-box:latest" ]; then
       running=$(${SUDO} docker inspect -f {{.State.Running}} ${c})
       if [ "${running}" != "true" ]; then
-        ${SUDO} docker rm "${c}" >/dev/null
+        ${SUDO} docker rm -v "${c}" >/dev/null
       fi
     fi
   done
