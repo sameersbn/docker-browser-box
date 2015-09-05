@@ -12,11 +12,13 @@ XSOCK=/tmp/.X11-unix
 XAUTH=/tmp/.docker.xauth
 
 list_browsers() {
+  echo ""
   echo "Launch a browser using:"
   echo "  chromium-browser                     - Launch Chromium"
   echo "  firefox                              - Launch Firefox"
   echo "  google-chrome|google-chrome-stable   - Launch Google Chrome"
   echo "  tor-browser                          - Launch Tor Browser"
+  echo ""
   exit 1
 }
 
