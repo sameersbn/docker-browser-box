@@ -6,7 +6,7 @@ USER_GID=${USER_GID:-1000}
 
 install_browser_box() {
   echo "Installing browser-box..."
-  install -m 0755 /scripts/browser-box /target/
+  install -m 0755 /var/cache/browser-box/browser-box /target/
   echo "Installing google-chrome..."
   ln -sf browser-box /target/google-chrome
   echo "Installing google-chrome-stable..."
