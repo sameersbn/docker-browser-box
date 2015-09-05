@@ -79,9 +79,9 @@ This will install wrapper scripts to launch:
 - `google-chome, google-chrome-stable`
 - `tor-browser`
 
->> **Note**
->>
->> If the application being launched is already installed on the host, then the host command is executed and the docker image is not started.
+> **Note**
+>
+> If the application being launched is already installed on the host, then the host command is executed and the docker image is not started.
 
 ## Use Cases
 
