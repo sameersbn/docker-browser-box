@@ -59,7 +59,6 @@ do
 done
 
 echo "Starting ${prog}..."
-touch ${XAUTH}
 ${SUDO} docker run -d \
   ${CAPABILITIES} \
   ${ENV_VARS} \
