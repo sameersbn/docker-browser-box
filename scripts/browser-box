@@ -64,4 +64,4 @@ ${SUDO} docker run -d \
   ${ENV_VARS} \
   ${VIDEO_DEVICES} \
   ${VOLUMES} \
-  sameersbn/browser-box:latest $(basename $0) $@ >/dev/null
+  sameersbn/browser-box:latest ${prog} $@ >/dev/null
