@@ -5,63 +5,64 @@ PATH=/usr/sbin:/usr/bin:/sbin:/bin
 prog=$(basename $0)
 exec=$(which $prog)
 
+# launch host binary if it exists
 if [ -n "${exec}" ]; then
   exec ${exec} $@
-else
-  USER_UID=$(id -u)
-  USER_GID=$(id -g)
-
-  TZ=$(cat /etc/timezone)
-
-  XSOCK=/tmp/.X11-unix
-  XAUTH=/tmp/.docker.xauth
-  touch ${XAUTH}
-  xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
-
-  ( id -Gn | grep docker ) || SUDO=sudo
-
-  # remove stopped containers
-  echo "Removing stopped containers..."
-  for c in $(${SUDO} docker ps -a -q)
-  do
-    image="$(${SUDO} docker inspect -f {{.Config.Image}} ${c})"
-    if [ "${image}" == "sameersbn/browser-box:latest" ]; then
-      running=$(${SUDO} docker inspect -f {{.State.Running}} ${c})
-      if [ "${running}" != "true" ]; then
-        ${SUDO} docker rm -v "${c}" >/dev/null
-      fi
-    fi
-  done
-
-  CAPABILITIES+="--cap-add=SYS_ADMIN"
-
-  # collect environment variables
-  ENV_VARS+=" --env=USER_UID=${USER_UID}"
-  ENV_VARS+=" --env=USER_GID=${USER_GID}"
-  ENV_VARS+=" --env=DISPLAY"
-  ENV_VARS+=" --env=XAUTHORITY=${XAUTH}"
-  ENV_VARS+=" --env=TZ=${TZ}"
-
-  # collect volumes arguments
-  VOLUMES+=" --volume=${XSOCK}:${XSOCK}"
-  VOLUMES+=" --volume=${XAUTH}:${XAUTH}"
-  VOLUMES+=" --volume=/run/user/${USER_UID}/pulse:/run/pulse"
-
-  # enumerate video devices for webcam support
-  VIDEO_DEVICES=
-  for device in /dev/video*
-  do
-    if [ -c $device ]; then
-      VIDEO_DEVICES="${VIDEO_DEVICES} --device $device:$device"
-    fi
-  done
-
-  echo "Starting ${prog}..."
-  touch ${XAUTH}
-  ${SUDO} docker run -d \
-    ${CAPABILITIES} \
-    ${ENV_VARS} \
-    ${VIDEO_DEVICES} \
-    ${VOLUMES} \
-    sameersbn/browser-box:latest $(basename $0) $@ >/dev/null
 fi
+
+USER_UID=$(id -u)
+USER_GID=$(id -g)
+
+TZ=$(cat /etc/timezone)
+
+XSOCK=/tmp/.X11-unix
+XAUTH=/tmp/.docker.xauth
+touch ${XAUTH}
+xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
+
+( id -Gn | grep docker ) || SUDO=sudo
+
+# remove stopped containers
+echo "Removing stopped containers..."
+for c in $(${SUDO} docker ps -a -q)
+do
+  image="$(${SUDO} docker inspect -f {{.Config.Image}} ${c})"
+  if [ "${image}" == "sameersbn/browser-box:latest" ]; then
+    running=$(${SUDO} docker inspect -f {{.State.Running}} ${c})
+    if [ "${running}" != "true" ]; then
+      ${SUDO} docker rm -v "${c}" >/dev/null
+    fi
+  fi
+done
+
+CAPABILITIES+="--cap-add=SYS_ADMIN"
+
+# collect environment variables
+ENV_VARS+=" --env=USER_UID=${USER_UID}"
+ENV_VARS+=" --env=USER_GID=${USER_GID}"
+ENV_VARS+=" --env=DISPLAY"
+ENV_VARS+=" --env=XAUTHORITY=${XAUTH}"
+ENV_VARS+=" --env=TZ=${TZ}"
+
+# collect volumes arguments
+VOLUMES+=" --volume=${XSOCK}:${XSOCK}"
+VOLUMES+=" --volume=${XAUTH}:${XAUTH}"
+VOLUMES+=" --volume=/run/user/${USER_UID}/pulse:/run/pulse"
+
+# enumerate video devices for webcam support
+VIDEO_DEVICES=
+for device in /dev/video*
+do
+  if [ -c $device ]; then
+    VIDEO_DEVICES="${VIDEO_DEVICES} --device $device:$device"
+  fi
+done
+
+echo "Starting ${prog}..."
+touch ${XAUTH}
+${SUDO} docker run -d \
+  ${CAPABILITIES} \
+  ${ENV_VARS} \
+  ${VIDEO_DEVICES} \
+  ${VOLUMES} \
+  sameersbn/browser-box:latest $(basename $0) $@ >/dev/null
