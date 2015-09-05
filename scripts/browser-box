@@ -2,14 +2,6 @@
 
 PATH=/usr/sbin:/usr/bin:/sbin:/bin
 
-prog=$(basename $0)
-exec=$(which $prog)
-
-# launch host binary if it exists
-if [[ -n ${exec} ]]; then
-  exec ${exec} $@
-fi
-
 # do we need to use sudo to start docker containers?
 ( id -Gn | grep docker ) || SUDO=sudo
 
@@ -18,6 +10,18 @@ USER_GID=$(id -g)
 
 XSOCK=/tmp/.X11-unix
 XAUTH=/tmp/.docker.xauth
+
+prog=$(basename $0)
+exec=$(which $prog)
+
+list_browsers() {
+  echo "Launch a browser using:"
+  echo "  chromium-browser                     - Launch Chromium"
+  echo "  firefox                              - Launch Firefox"
+  echo "  google-chrome|google-chrome-stable   - Launch Google Chrome"
+  echo "  tor-browser                          - Launch Tor Browser"
+  exit 1
+}
 
 cleanup_stopped_browser_box_instances() {
   echo "Cleaning up stopped browser-box instances..."
@@ -68,6 +72,16 @@ prepare_docker_device_parameters() {
     fi
   done
 }
+
+if [[ $prog == "browser-box" ]]; then
+  list_browsers
+  exit 1
+fi
+
+# launch host binary if it exists
+if [[ -n ${exec} ]]; then
+  exec ${exec} $@
+fi
 
 cleanup_stopped_browser_box_instances
 prepare_docker_caps_parameters $prog
