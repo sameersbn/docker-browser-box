@@ -11,9 +11,6 @@ USER_GID=$(id -g)
 XSOCK=/tmp/.X11-unix
 XAUTH=/tmp/.docker.xauth
 
-prog=$(basename $0)
-exec=$(which $prog)
-
 list_browsers() {
   echo "Launch a browser using:"
   echo "  chromium-browser                     - Launch Chromium"
@@ -73,13 +70,21 @@ prepare_docker_device_parameters() {
   done
 }
 
-if [[ $prog == "browser-box" ]]; then
-  list_browsers
-  exit 1
-fi
-
-# launch host binary if it exists
-if [[ -n ${exec} ]]; then
+prog=$(basename $0)
+exec=$(which $prog)
+if [[ ${prog} == "browser-box" ]]; then
+  case ${1} in
+    google-chrome|google-chrome-stable|tor-browser|chromium-browser|firefox)
+      prog=${1}
+      shift
+      ;;
+    *|help)
+      list_browsers
+      exit 1
+      ;;
+  esac
+elif [[ -n ${exec} ]]; then
+  # launch host binary if it exists
   exec ${exec} $@
 fi
 

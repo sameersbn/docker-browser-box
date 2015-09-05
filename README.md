@@ -81,7 +81,7 @@ This will install wrapper scripts to launch:
 
 > **Note**
 >
-> If the application being launched is already installed on the host, then the host command is executed and the docker image is not started.
+> If the browser is installed on the the host then it is launched instead of starting it in a docker container. To force the launch a browser in a container, launch the browser using the `browser-box` script. For example, `browser-box firefox` will launch the Firefox browser inside a Docker container regardless of whether Firefox is installed on the host or not.
 
 ## Use Cases
 
