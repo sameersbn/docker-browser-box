@@ -23,10 +23,10 @@ cleanup_stopped_browser_box_instances() {
   echo "Cleaning up stopped browser-box instances..."
   for c in $(${SUDO} docker ps -a -q)
   do
-    image="$(${SUDO} docker inspect -f {{.Config.Image}} ${c})"
-    if [ "${image}" == "sameersbn/browser-box:latest" ]; then
+    image=$(${SUDO} docker inspect -f {{.Config.Image}} ${c})
+    if [[ ${image} == "sameersbn/browser-box:latest" ]]; then
       running=$(${SUDO} docker inspect -f {{.State.Running}} ${c})
-      if [ "${running}" != "true" ]; then
+      if [[ ${running} != true ]]; then
         ${SUDO} docker rm -v "${c}" >/dev/null
       fi
     fi
@@ -63,7 +63,7 @@ prepare_docker_device_parameters() {
   VIDEO_DEVICES=
   for device in /dev/video*
   do
-    if [ -c $device ]; then
+    if [[ -c $device ]]; then
       VIDEO_DEVICES="${VIDEO_DEVICES} --device $device:$device"
     fi
   done
