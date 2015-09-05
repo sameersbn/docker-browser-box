@@ -15,7 +15,7 @@
 
 # Introduction
 
-`Dockerfile` to create a [Docker](https://www.docker.com/) container image with consisting of the following web browsers:
+`Dockerfile` to create a [Docker](https://www.docker.com/) container image consisting of the following web browsers:
 
  - chromium-browser
  - firefox
@@ -81,7 +81,7 @@ This will install wrapper scripts to launch:
 
 > **Note**
 >
-> If the browser is installed on the the host then it is launched instead of starting it in a docker container. To force the launch a browser in a container, launch the browser using the `browser-box` script. For example, `browser-box firefox` will launch the Firefox browser inside a Docker container regardless of whether Firefox is installed on the host or not.
+> If the browser being launched is installed on the the host then the host binary is launched instead of starting a Docker container. To force the launch of a browser in a container use the `browser-bundle` script. For example, `browser-bundle firefox` will launch the Firefox browser inside a Docker container regardless of whether it is installed on the host or not.
 
 ## Use Cases
 
@@ -106,7 +106,7 @@ To upgrade to newer releases:
   docker pull sameersbn/browser-box:latest
   ```
 
-  2. Run `install` to make sure host scripts are updated.
+  2. Run `install` to make sure the host scripts are updated.
 
   ```bash
   docker run -it --rm \
