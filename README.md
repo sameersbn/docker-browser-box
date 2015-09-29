@@ -72,6 +72,18 @@ docker run -it --rm \
   sameersbn/browser-box:latest install
 ```
 
+If you would the settings for chrome and firfox to persist
+afer each time the browser is launched then you will need to add additional environment variable to the install command. In the example below "username" needs to get replace with your loggin user name.
+
+```bash
+docker run -it --rm \
+  --volume /usr/local/bin:/target \
+  --env CHROME_USERDATA=/home/username/.chrome
+  --env FIREFOX_USERDATA=/home/username/.mozillia
+  sameersbn/browser-box:latest install
+```
+
+
 This will install wrapper scripts to launch:
 
 - `chromium-browser`
