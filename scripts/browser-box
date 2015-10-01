@@ -56,8 +56,13 @@ prepare_docker_env_parameters() {
   ENV_VARS+=" --env=USER_GID=${USER_GID}"
   ENV_VARS+=" --env=DISPLAY"
   ENV_VARS+=" --env=XAUTHORITY=${XAUTH}"
-  ENV_VARS+=" --env=TZ=$(cat /etc/timezone)"
   ENV_VARS+=" --env=BROWSER_BOX_USER=${BROWSER_BOX_USER}"
+  if [ -f /etc/timezone ]; then
+	  ENV_VARS+=" --env=TZ=$(cat /etc/timezone)"
+  else
+    [ ! -z "${TIMEZONE}" ] && ENV_VARS+=" --env=TZ=${TIMEZONE}"
+  fi
+
 }
 
 prepare_docker_volume_parameters() {
@@ -72,8 +77,8 @@ prepare_docker_volume_parameters() {
 # TODO: Need to add tor and chromium userdata dirs
 #       if wanted by the user, maybe use env variables
 prepare_docker_userdata_volumes() {
-  [ -n ${CHROME_USERDATA} ] && VOLUMES+=" --volume=${CHROME_USERDATA}:/home/${BROWSER_BOX_USER}/.config/google-chrome"
-  [ -n ${FIREFOX_USERDATA} ] && VOLUMES+=" --volume=${FIREFOX_USERDATA}:/home/${BROWSER_BOX_USER}/.mozilla"
+  [ ! -z ${CHROME_USERDATA} ] && VOLUMES+=" --volume=${CHROME_USERDATA}:/home/${BROWSER_BOX_USER}/.config/google-chrome"
+  [ ! -z ${FIREFOX_USERDATA} ] && VOLUMES+=" --volume=${FIREFOX_USERDATA}:/home/${BROWSER_BOX_USER}/.mozilla"
 }
 
 prepare_docker_device_parameters() {
