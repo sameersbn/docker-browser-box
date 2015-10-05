@@ -34,7 +34,7 @@ install_browser_box() {
     echo "Updating FireFox user volume..."
     sed -i -e s%"FIREFOX_USERDATA=.*$"%"FIREFOX_USERDATA\=${FIREFOX_USERDATA}"%1 /target/browser-box
   fi
-  sed -i -e s%"\(BROWSER_BOX_REPO=\).*$"%"\1${BROWSER_BOX_REPO}"%g
+  sed -i -e s%"\(BROWSER_BOX_REPO=\).*$"%"\1${BROWSER_BOX_REPO}"%1 /target/browser-box
 
 }
 
