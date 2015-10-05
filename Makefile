@@ -18,7 +18,8 @@ VOLUMES = \
 	--volume=/run/user/$(shell id -u)/pulse:/run/pulse
 
 ENV_INSTL_USER = \
-	--env="BROWSER_BOX_USER=${USER}"
+	--env="BROWSER_BOX_USER=${USER}" \
+	--env="BROWSER_BOX_REPO=${USER}"
 
 ifdef CHROME_USERDATA
 ENV_CHROME_USERDATA = \
