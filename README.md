@@ -1,4 +1,4 @@
-# sameersbn/browser-box:latest
+# quay.io/sameersbn/browser-box:latest
 
 - [Introduction](#introduction)
   - [Contributing](#contributing)
@@ -50,10 +50,10 @@ If the above recommendations do not help then [report your issue](../../issues/n
 
 ## Installation
 
-This image is available as a [trusted build](//hub.docker.com/r/sameersbn/browser-box) on the [Docker hub](//hub.docker.com) and is the recommended method of installation.
+Automated builds of the image are available on [Quay.io](https://quay.io/repository/sameersbn/browser-box) and is the recommended method of installation.
 
 ```bash
-docker pull sameersbn/browser-box:latest
+docker pull quay.io/sameersbn/browser-box:latest
 ```
 
 Alternatively you can build the image yourself.
@@ -70,7 +70,7 @@ With the image locally available, install the wrapper scripts using:
 docker run -it --rm \
   --volume /usr/local/bin:/target \
   --env BROWSER_BOX_REPO=sameersbn \
-  sameersbn/browser-box:latest install
+  quay.io/sameersbn/browser-box:latest install
 ```
 
 If you would the settings for chrome and firfox to persist
@@ -82,7 +82,7 @@ docker run -it --rm \
   --env CHROME_USERDATA=/home/username/.chrome \
   --env FIREFOX_USERDATA=/home/username/.mozillia \
   --env BROWSER_BOX_REPO=sameersbn \
-  sameersbn/browser-box:latest install
+  quay.io/sameersbn/browser-box:latest install
 ```
 
 
@@ -117,7 +117,7 @@ To upgrade to newer releases:
   1. Download the updated Docker image:
 
   ```bash
-  docker pull sameersbn/browser-box:latest
+  docker pull quay.io/sameersbn/browser-box:latest
   ```
 
   2. Run `install` to make sure the host scripts are updated.
@@ -125,7 +125,7 @@ To upgrade to newer releases:
   ```bash
   docker run -it --rm \
     --volume /usr/local/bin:/target \
-    sameersbn/browser-box:latest install
+    quay.io/sameersbn/browser-box:latest install
   ```
 
 ## Uninstallation
@@ -133,7 +133,7 @@ To upgrade to newer releases:
 ```bash
 docker run -it --rm \
   --volume /usr/local/bin:/target \
-  sameersbn/browser-box:latest uninstall
+  quay.io/sameersbn/browser-box:latest uninstall
 ```
 
 ## Shell Access
