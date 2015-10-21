@@ -88,7 +88,7 @@ grant_access_to_video_devices() {
       VIDEO_GID=$(stat -c %g $device)
       VIDEO_GROUP=$(stat -c %G $device)
       if [[ ${VIDEO_GROUP} == "UNKNOWN" ]]; then
-        VIDEO_GROUP=video
+        VIDEO_GROUP=browser-box-video
         groupadd -g ${VIDEO_GID} ${VIDEO_GROUP}
       fi
       usermod -a -G ${VIDEO_GROUP} ${BROWSER_BOX_USER}
