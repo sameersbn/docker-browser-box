@@ -1,4 +1,4 @@
-FROM quay.io/sameersbn/ubuntu:14.04.20151023
+FROM sameersbn/ubuntu:14.04.20151023
 
 ENV TOR_VERSION=5.0.3 \
     TOR_FINGERPRINT=0x4E2C6E8793298290

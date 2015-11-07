@@ -43,12 +43,12 @@ help:
 	@echo ""
 
 clean:
-	@docker rm -f `docker ps -a | grep "quay.io/sameersbn/browser-box" | awk '{print $$1}'` > /dev/null 2>&1 || exit 0
-	@docker rmi `docker images  | grep "quay.io/sameersbn/browser-box" | awk '{print $$3}'` > /dev/null 2>&1 || exit 0
+	@docker rm -f `docker ps -a | grep "${USER}/browser-box" | awk '{print $$1}'` > /dev/null 2>&1 || exit 0
+	@docker rmi `docker images  | grep "${USER}/browser-box" | awk '{print $$3}'` > /dev/null 2>&1 || exit 0
 
 
 build:
-	@docker build --rm=true --tag=quay.io/sameersbn/browser-box .
+	@docker build --rm=true --tag=${USER}/browser-box .
 
 install uninstall: build
 	@docker run -it --rm \
@@ -56,7 +56,7 @@ install uninstall: build
 		${ENV_CHROME_USERDATA} \
 		${ENV_FIREFOX_USERDATA} \
 		${ENV_INSTL_USER} \
-		quay.io/sameersbn/browser-box:latest $@
+		${USER}/browser-box:latest $@
 
 google-chrome tor-browser chromium-browser firefox bash:
 	@touch ${XAUTH}
@@ -65,4 +65,4 @@ google-chrome tor-browser chromium-browser firefox bash:
 		${CAPABILITIES} \
 		${ENV_VARS} \
 		${VOLUMES} \
-		quay.io/sameersbn/browser-box:latest $@
+		${USER}/browser-box:latest $@
