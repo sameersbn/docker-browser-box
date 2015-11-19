@@ -63,9 +63,7 @@ docker pull sameersbn/browser-box:latest
 Alternatively you can build the image yourself.
 
 ```bash
-git clone https://github.com/sameersbn/docker-browser-box.git
-cd docker-browser-box
-docker build --tag $USER/browser-box .
+docker build -t sameersbn/browser-box github.com/sameersbn/docker-browser-box
 ```
 
 With the image locally available, install the wrapper scripts using:
