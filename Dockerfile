@@ -5,6 +5,9 @@ ENV TOR_VERSION=5.0.7 \
 
 RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo apt-key add - \
  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+ && mkdir ~/.gnupg \
+ && gpg --keyserver hkp://hkps.pool.sks-keyservers.net:80 --recv-keys ${TOR_FINGERPRINT} \
+ && gpg --fingerprint ${TOR_FINGERPRINT} | grep -q "Key fingerprint = EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290" \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y xz-utils file locales dbus-x11 pulseaudio dmz-cursor-theme curl \
       fonts-dejavu fonts-liberation hicolor-icon-theme \
@@ -18,9 +21,6 @@ RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo 
  && mkdir -p /usr/lib/tor-browser \
  && wget -O /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz  https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz \
  && wget -O /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc https://www.torproject.org/dist/torbrowser/${TOR_VERSION}/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc \
- && mkdir ~/.gnupg \
- && gpg --keyserver hkp://hkps.pool.sks-keyservers.net:80 --recv-keys ${TOR_FINGERPRINT} \
- && gpg --fingerprint ${TOR_FINGERPRINT} | grep "Key fingerprint = EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290" \
  && gpg /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz.asc \
  && tar -Jvxf /tmp/tor-browser-linux64-${TOR_VERSION}_en-US.tar.xz --strip=1 -C /usr/lib/tor-browser \
  && ln -sf /usr/lib/tor-browser/Browser/start-tor-browser /usr/bin/tor-browser \
