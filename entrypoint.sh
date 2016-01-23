@@ -99,7 +99,7 @@ grant_access_to_video_devices() {
 
 launch_browser() {
   cd /home/${BROWSER_BOX_USER}
-  exec sudo -u ${BROWSER_BOX_USER} -H LD_PRELOAD='/usr/$LIB/libstdc++.so.6' PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
+  exec sudo -HEu ${BROWSER_BOX_USER} PULSE_SERVER=/run/pulse/native $@ ${extra_opts}
 }
 
 case "$1" in
