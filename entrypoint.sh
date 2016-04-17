@@ -79,6 +79,9 @@ create_user() {
     adduser --disabled-login --uid ${USER_UID} --gid ${USER_GID} \
       --gecos 'Browser Box' ${BROWSER_BOX_USER}
   fi
+
+  # fixes issue #7
+  chown -R ${BROWSER_BOX_USER}: /usr/lib/tor-browser
 }
 
 grant_access_to_video_devices() {
