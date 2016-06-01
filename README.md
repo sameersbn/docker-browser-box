@@ -75,8 +75,8 @@ docker run -it --rm \
   sameersbn/browser-box:latest install
 ```
 
-If you would the settings for chrome and firfox to persist
-afer each time the browser is launched then you will need to add additional environment variable to the install command. In the example below "username" needs to get replace with your loggin user name.
+If you would the settings for chrome and firefox to persist
+after each time the browser is launched then you will need to add additional environment variable to the install command. In the example below "username" needs to get replace with your login user name.
 
 ```bash
 docker run -it --rm \
