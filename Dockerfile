@@ -1,6 +1,6 @@
 FROM sameersbn/ubuntu:14.04.20160817
 
-ENV TOR_VERSION=6.0.2 \
+ENV TOR_VERSION=6.0.4 \
     TOR_FINGERPRINT=0x4E2C6E8793298290
 
 RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo apt-key add - \
