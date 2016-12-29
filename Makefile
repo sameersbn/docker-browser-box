@@ -48,7 +48,7 @@ clean:
 
 
 build:
-	@docker build --rm=true --tag=${USER}/browser-box .
+	@docker build --rm=true --tag=${USER}/browser-box:$(shell cat VERSION) .
 
 install uninstall: build
 	@docker run -it --rm \
@@ -56,7 +56,7 @@ install uninstall: build
 		${ENV_CHROME_USERDATA} \
 		${ENV_FIREFOX_USERDATA} \
 		${ENV_INSTL_USER} \
-		${USER}/browser-box:latest $@
+		${USER}/browser-box:$(shell cat VERSION) $@
 
 google-chrome tor-browser chromium-browser firefox bash:
 	@touch ${XAUTH}
@@ -65,4 +65,4 @@ google-chrome tor-browser chromium-browser firefox bash:
 		${CAPABILITIES} \
 		${ENV_VARS} \
 		${VOLUMES} \
-		${USER}/browser-box:latest $@
+		${USER}/browser-box:$(shell cat VERSION) $@
