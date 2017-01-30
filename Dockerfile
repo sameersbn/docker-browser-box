@@ -1,12 +1,12 @@
 FROM sameersbn/ubuntu:14.04.20170123
 
-ENV TOR_VERSION=6.0.8 \
+ENV TOR_VERSION=6.5 \
     TOR_FINGERPRINT=0x4E2C6E8793298290
 
 RUN wget -q -O - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo apt-key add - \
  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
  && mkdir ~/.gnupg \
- && gpg --keyserver hkp://hkps.pool.sks-keyservers.net:80 --recv-keys ${TOR_FINGERPRINT} \
+ && gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys ${TOR_FINGERPRINT} \
  && gpg --fingerprint ${TOR_FINGERPRINT} | grep -q "Key fingerprint = EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290" \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y xz-utils file locales dbus-x11 pulseaudio dmz-cursor-theme curl \
