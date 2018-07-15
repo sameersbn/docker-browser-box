@@ -1,3 +1,6 @@
+IMAGE:=sameersbn/$(shell basename $$PWD)
+RELEASE=$(shell cat VERSION)
+
 all: build
 
 XSOCK=/tmp/.X11-unix
@@ -43,12 +46,11 @@ help:
 	@echo ""
 
 clean:
-	@docker rm -f `docker ps -a | grep "${USER}/browser-box" | awk '{print $$1}'` > /dev/null 2>&1 || exit 0
-	@docker rmi `docker images  | grep "${USER}/browser-box" | awk '{print $$3}'` > /dev/null 2>&1 || exit 0
-
+	@docker rm -f `docker ps -a | grep "${IMAGE}" | awk '{print $$1}'` > /dev/null 2>&1 || exit 0
+	@docker rmi `docker images  | grep "${IMAGE}" | awk '{print $$3}'` > /dev/null 2>&1 || exit 0
 
 build:
-	@docker build --rm=true --tag=${USER}/browser-box:$(shell cat VERSION) .
+	@docker build --tag=${IMAGE}:${RELEASE} .
 
 install uninstall: build
 	@docker run -it --rm \
@@ -56,7 +58,7 @@ install uninstall: build
 		${ENV_CHROME_USERDATA} \
 		${ENV_FIREFOX_USERDATA} \
 		${ENV_INSTL_USER} \
-		${USER}/browser-box:$(shell cat VERSION) $@
+		${IMAGE}:${RELEASE} $@
 
 google-chrome tor-browser chromium-browser firefox bash:
 	@touch ${XAUTH}
@@ -65,4 +67,4 @@ google-chrome tor-browser chromium-browser firefox bash:
 		${CAPABILITIES} \
 		${ENV_VARS} \
 		${VOLUMES} \
-		${USER}/browser-box:$(shell cat VERSION) $@
+		${IMAGE}:${RELEASE} $@
