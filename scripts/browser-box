@@ -150,4 +150,4 @@ ${SUDO} docker run -d \
   ${VIDEO_DEVICES} \
   ${VOLUMES} \
   --name="${prog}" \
-  ${BROWSER_BOX_REPO}/browser-box:2018.07.15 ${prog} $@ >/dev/null
+  ${BROWSER_BOX_REPO}/browser-box:2018.07.21 ${prog} $@ >/dev/null

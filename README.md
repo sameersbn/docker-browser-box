@@ -1,6 +1,6 @@
 [![Docker Repository on Quay.io](https://quay.io/repository/sameersbn/browser-box/status "Docker Repository on Quay.io")](https://quay.io/repository/sameersbn/browser-box)
 
-# sameersbn/browser-box:2018.07.15
+# sameersbn/browser-box:2018.07.21
 
 - [Introduction](#introduction)
   - [Contributing](#contributing)
@@ -57,7 +57,7 @@ Automated builds of the image are available on [Dockerhub](https://hub.docker.co
 > **Note**: Builds are also available on [Quay.io](https://quay.io/repository/sameersbn/browser-box)
 
 ```bash
-docker pull sameersbn/browser-box:2018.07.15
+docker pull sameersbn/browser-box:2018.07.21
 ```
 
 Alternatively you can build the image yourself.
@@ -72,7 +72,7 @@ With the image locally available, install the wrapper scripts using:
 docker run -it --rm \
   --volume /usr/local/bin:/target \
   --env BROWSER_BOX_REPO=sameersbn \
-  sameersbn/browser-box:2018.07.15 install
+  sameersbn/browser-box:2018.07.21 install
 ```
 
 If you would the settings for chrome and firefox to persist
@@ -84,7 +84,7 @@ docker run -it --rm \
   --env CHROME_USERDATA=/home/username/.chrome \
   --env FIREFOX_USERDATA=/home/username/.mozillia \
   --env BROWSER_BOX_REPO=sameersbn \
-  sameersbn/browser-box:2018.07.15 install
+  sameersbn/browser-box:2018.07.21 install
 ```
 
 
@@ -119,7 +119,7 @@ To upgrade to newer releases:
   1. Download the updated Docker image:
 
   ```bash
-  docker pull sameersbn/browser-box:2018.07.15
+  docker pull sameersbn/browser-box:2018.07.21
   ```
 
   2. Run `install` to make sure the host scripts are updated.
@@ -127,7 +127,7 @@ To upgrade to newer releases:
   ```bash
   docker run -it --rm \
     --volume /usr/local/bin:/target \
-    sameersbn/browser-box:2018.07.15 install
+    sameersbn/browser-box:2018.07.21 install
   ```
 
 ## Uninstallation
@@ -135,7 +135,7 @@ To upgrade to newer releases:
 ```bash
 docker run -it --rm \
   --volume /usr/local/bin:/target \
-  sameersbn/browser-box:2018.07.15 uninstall
+  sameersbn/browser-box:2018.07.21 uninstall
 ```
 
 ## Shell Access
