@@ -26,9 +26,9 @@ COPY --from=install-tor-browser /etc/apt/sources.list /etc/apt/sources.list
 COPY --from=install-tor-browser /usr/lib/tor-browser /usr/lib/tor-browser
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      xz-utils file locales dbus-x11 pulseaudio dmz-cursor-theme curl \
-      fonts-dejavu fonts-liberation hicolor-icon-theme \
+ && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+      xz-utils file locales dbus-x11 pulseaudio dmz-cursor-theme sudo \
+      fonts-dejavu fonts-liberation fonts-indic hicolor-icon-theme \
       libcanberra-gtk3-0 libcanberra-gtk-module libcanberra-gtk3-module \
       libasound2 libglib2.0 libgtk2.0-0 libdbus-glib-1-2 libxt6 libexif12 \
       libgl1-mesa-glx libgl1-mesa-dri libstdc++6 nvidia-346 \
